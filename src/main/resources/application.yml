@@ -1,0 +1,47 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: theatre-service
+
+  cache:
+    type: simple #redis
+#    redis:
+#      time-to-live: 600000
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+
+  datasource:
+    write:
+      jdbc-url: jdbc:mysql://localhost:3306/theatre_db_write
+      username: root
+      password: roopa
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      hikari:
+        maximum-pool-size: 10
+
+    read:
+      jdbc-url: jdbc:mysql://localhost:3306/theatre_db_read
+      username: root
+      password: roopa
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      hikari:
+        maximum-pool-size: 10
+
+#  data:
+#    redis:
+#      host: localhost
+#      port: 6379
+
+jwt:
+  secret: my-super-secret-key-my-super-secret-key-123456
+  expiration: 3600000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
